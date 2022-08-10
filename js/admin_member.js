@@ -1,3 +1,4 @@
+let memberTable;
 window.onload = (e) => {
     // memberList initialization
     axios
@@ -6,11 +7,9 @@ window.onload = (e) => {
             let members = response.data;
             console.log(members);
             members.forEach((member) => {
-                if (member.memStatus === "APPROVED") {
-                    addList(member);
-                }
+                addList(member);
             });
-            $("#memberTable").DataTable({
+            memberTable = $("#memberTable").DataTable({
                 paging: true,
                 lengthChange: false,
                 searching: false,
@@ -49,30 +48,63 @@ window.onload = (e) => {
                 .catch((error) => console.log(error));
         }
     });
+
+    $("#resetTable").on("click", (e) => {
+        removeAllMembers();
+        memberTable.clear();
+        axios
+            .get("http://localhost:8080/yokult/api/0.02/member")
+            .then((response) => {
+                let members = response.data;
+                console.log(members);
+                members.forEach((member) => {
+                    addList(member);
+                });
+                memberTable = $("#memberTable").DataTable({
+                    paging: true,
+                    lengthChange: false,
+                    searching: false,
+                    ordering: true,
+                    info: true,
+                    autoWidth: false,
+                    responsive: true,
+                });
+            })
+            .catch((error) => console.log(error));
+    });
 };
+
+function removeAllMembers() {
+    $("#memberTable>tbody>tr").remove();
+}
+
 function search() {
     let searchID = $("#searchID").val();
     let searchValue = $("#searchValue").val();
     console.log(searchID);
     console.log(searchValue);
+    removeAllMembers();
+    memberTable.clear();
+    let params = {};
+    switch (searchID) {
+        case "memID":
+            params["memID"] = searchValue;
+            break;
+        case "memName":
+            params["memName"] = searchValue;
+            break;
+        case "memEmail":
+            params["memEmail"] = searchValue;
+    }
     axios
-        .get("http://localhost:8080/Proj_Yokult/api/0.01/member", {
-            params: { searchID: searchID, searchValue: searchValue },
-        })
+        .get("http://localhost:8080/yokult/api/0.02/member/query", { params })
         .then((response) => {
-            let msg = response.data["msg"];
-            if (msg === "success") {
-                let members = response.data["members"];
-                console.log(members);
-                members.forEach((member) => {
-                    console.log(member.memStatus);
-                    if (member.memStatus === "APPROVED") {
-                        addList(member);
-                    }
-                });
-            } else {
-                console.log(response.data["msg"]);
-            }
+            console.log(response);
+            let members = response.data;
+            console.log(members);
+            members.forEach((member) => {
+                addList(member);
+            });
         })
         .catch((error) => console.log(error));
 }
