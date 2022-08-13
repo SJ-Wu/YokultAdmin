@@ -328,11 +328,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <td>
-
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+                  <button type="button" id="add" class="btn btn-outline-primary" data-toggle="modal"
+                    data-target="#myModal">
                     新增
                   </button>
-
                 </td>
               </ol>
             </div>
@@ -344,284 +343,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <!-- /.content-header -->
       <!-- 陳花花、黃泡泡、林毛毛、楊莉莉 -->
-      <!-- emp main -->
-      <!-- 陳花花 Main content -->
-      <div class="content1" id="flower">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-              <!-- jquery validation -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">花花</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- 陳花花資料 -->
-                <div class="card-main">
-                  <div class="card-body-my">
-                    <img class="img-img" src="images/img-mymy/nurse1.png" alt="陳花花照片" />
-                  </div>
-                  <div class="card-text-my">
-                    <h3 class="name">姓名:陳花花</h3>
-                    <h5 class="email">信箱:flower@mail.com</h5>
-                    <h5 class="password">身分證字號:A221234567</h5>
-                    <h5 class="birthday">生日:1999/01/01</h5>
-                    <h5 class="phone">手機:0912345678</h5>
-                  </div>
-                  <div class="card-button">
-                    <div class="button-btn">
-                      <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal"
-                        data-target="#myModal">
-                        編輯
-                      </button>
-                      <button type="button" class="btn btn-block btn-outline-primary" id="deletebutton">
-                        刪除
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- /陳花花資料 -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!--/.col (left) -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+      <div id="staffList">
+        <!-- emp main -->
       </div>
-      <!-- /陳花花main -->
-
-      <!-- 黃泡泡Main content -->
-      <div class="content" id="pop">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-              <!-- jquery validation -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                  <h3 class="card-title">泡泡</h3>
-                </div>
-                <!-- 黃泡泡資料 -->
-
-                <div class="card-main">
-                  <div class="card-body-my">
-                    <img class="img-img" src="images/img-mymy/nurse2.png" alt="黃泡泡照片" />
-                  </div>
-
-                  <div class="card-text-my">
-                    <h3 class="name">姓名:黃泡泡</h3>
-                    <br />
-                    <h5 class="email">信箱:pop@mail.com</h5>
-                    <h5 class="password">身分證字號:A222345678</h5>
-                    <h5 class="birthday">生日:1999/01/03</h5>
-                    <h5 class="phone">手機:0912345678</h5>
-                  </div>
-                  <div class="card-button">
-                    <div class="button-btn">
-                      <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal"
-                        data-target="#myModal"> 編輯
-                      </button>
-
-                      <button type="button" class="btn btn-block btn-outline-primary" id="deletebutton1">
-                        刪除
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- /黃泡泡資料 -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!--/.col (left) -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- /黃泡泡main -->
-
-      <!-- 林毛毛 Main content -->
-      <div class="content" id="green">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-              <!-- jquery validation -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                  <h3 class="card-title">毛毛</h3>
-                </div>
-                <!-- 林毛毛資料 -->
-
-                <div class="card-main">
-                  <div class="card-body-my">
-                    <img class="img-img" src="images/img-mymy/nurse3.png" alt="林毛毛照片" />
-                  </div>
-
-                  <div class="card-text-my">
-                    <h3 class="name">姓名:林毛毛</h3>
-                    <br />
-                    <h5 class="email">信箱:green@mail.com</h5>
-                    <h5 class="password">身分證字號:A224567890</h5>
-                    <h5 class="birthday">生日:1999/01/02</h5>
-                    <h5 class="phone">手機:0912345678</h5>
-                  </div>
-                  <div class="card-button">
-                    <div class="button-btn">
-                      <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal"
-                        data-target="#myModal"> 編輯
-                      </button>
-
-                      <button type="button" class="btn btn-block btn-outline-primary" id="deletebutton2">
-                        刪除
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- /林毛毛資料 -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!--/.col (left) -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- /林毛毛main -->
-
-      <!-- 楊莉莉Main content -->
-      <div class="content" id="monkey">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-              <!-- jquery validation -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                  <h3 class="card-title">莉莉</h3>
-                </div>
-                <!-- 楊莉莉資料 -->
-
-                <div class="card-main">
-                  <div class="card-body-my">
-                    <img class="img-img" src="images/img-mymy/nurse4.png" alt="楊莉莉照片" />
-                  </div>
-
-                  <div class="card-text-my">
-                    <h3 class="name">姓名:楊莉莉</h3>
-                    <br />
-                    <h5 class="email">信箱:monkey@mail.com</h5>
-                    <h5 class="password">身分證字號:A225678901</h5>
-                    <h5 class="birthday">生日:1999/01/04</h5>
-                    <h5 class="phone">手機:0912345678</h5>
-                  </div>
-                  <div class="card-button">
-                    <div class="button-btn">
-                      <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal"
-                        data-target="#myModal"> 編輯
-                      </button>
-
-                      <button type="button" class="btn btn-block btn-outline-primary" id="deletebutton3">
-                        刪除
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- /楊莉莉資料 -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!--/.col (left) -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- /楊莉莉main -->
-
       <!-- /Content Wrapper. Contains page content 主頁面欄位-->
     </div>
 
     <!-- 新增表單 -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+      data-backdrop="static">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">
-              新增人員資料
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title" id="myModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeButton">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form class="form-horizontal" id="nurseData">
+              <input type="text" id="recipient-id" hidden></input>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">姓名:</label>
-                <input type="text" class="form-control" id="recipient-name" />
+                <input type="text" class="form-control" id="recipient-name" required="required" placeholder="中文全名"
+                  pattern="^[\u4E00-\u9FA5]{2,4}$" value="">
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">信箱:</label>
-                <input type="text" class="form-control" id="recipient-mail" />
+                <label for="recipient-mail" class="col-form-label">信箱:</label>
+                <input type="email" class="form-control" id="recipient-mail" required="required"
+                  pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" placeholder="信箱" value="" />
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">身分證字號:</label>
-                <input type="text" class="form-control" id="recipient-id_number" />
+                <label for="recipient-id_number" class="col-form-label">身分證字號:</label>
+                <input type="text" class="form-control" id="recipient-id_number" required="required"
+                  pattern="^[A-Za-z]\d{9}$" placeholder="身分證字號" />
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">生日:</label>
-                <input type="text" class="form-control" id="recipient-birthday" />
+                <label for="recipient-birthday" class="col-form-label">生日:</label>
+                <input type="date" class="form-control" id="recipient-birthday" required="required"
+                  pattern="^\d{4}(\-)\d{1,2}\1\d{1,2}$" placeholder="生日 yyyy-MM-dd" min="1960-01-01" max="2005-01-01" />
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">手機:</label>
-                <input type="text" class="form-control" id="recipient-phone" />
+                <label for="recipient-phone" class="col-form-label">手機:</label>
+                <input type="text" class="form-control" id="recipient-phone" required="required" pattern="09\d{8}"
+                  placeholder="手機" />
               </div>
               <div class="form-group">
-                <label for="exampleFormControlFile1">上傳照片</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <label>上傳照片</label>
+                <input type="file" class="form-control-file" id="the_file" multiple>
+                <input type="text" id="base64" hidden />
+                <ul type="text" class="picture_list"></ul>
               </div>
 
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">備註:</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
-            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              取消
-            </button>
-            <button type="button" class="btn btn-primary">
-              送出
-            </button>
+            <button type="button" id="fastInput" class="btn btn-outline-dark">自動填入</button>
+            <button type="button" id="cancelForm" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="submit" id="newnurse" class="btn btn-primary">送出</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -650,44 +430,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
-  <!-- <script src="js/adminlte.min.js"></script> -->
   <script src="plugins/nurse.js/adminlte.min.nurse.js"></script>
+  <!-- sweetalert2 -->
+  <script src="plugins/nurse.js/sweetalert2.all.min.js"></script>
+  <!-- nurseJs -->
+  <script src="/plugins/nurse.js/nurseJs.js"></script>
 
-  <script>
-    // ========刪除========
-    // 刪除花花
-    // function aClick() {
-    // }
-    $("#deletebutton").click(function () {
-      alert("確認刪除嗎?")
-      $("body").remove("click", "#flower", aClick)
-        .find("#flower").text("");
-    });
-    // 刪除泡泡
-    function aClick() {
-    }
-    $("#deletebutton1").click(function () {
-      alert("確認刪除嗎?")
-      $("body").remove("click", "#pop", aClick)
-        .find("#pop").text("");
-    });
-    // 刪除毛毛
-    function aClick() {
-    }
-    $("#deletebutton2").click(function () {
-      alert("確認刪除嗎?")
-      $("body").remove("click", "#green", aClick)
-        .find("#green").text("");
-    });
-    // 刪除莉莉
-    function aClick() {
-    }
-    $("#deletebutton3").click(function () {
-      alert("確認刪除嗎?")
-      $("body").remove("click", "#monkey", aClick)
-        .find("#monkey").text("");
-    });
-  </script>
+  <script src="plugins/schedule.js/moment.min.js"></script>
+
 </body>
 
 

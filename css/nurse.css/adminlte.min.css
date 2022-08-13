@@ -69755,6 +69755,18 @@ a.text-muted:hover {
   height: 400px;
 }
 
+img.preview{
+  width: 200px;
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul > li{
+  display: inline-block;
+  vertical-align: top;
+}
 /* .card-button > div{ */
 /* position:absolute; */
 /* bottom/:10px; */
