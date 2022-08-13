@@ -328,7 +328,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <button type="button" class="btn btn-block btn-outline-info">
+              <div>
+                <button type="button" id="fastInput" class="btn btn-outline-dark">自動填入</button>
+              </div>
+              <button type="submit" class="btn btn-block btn-outline-info" id="allSubmit">
                 送出
               </button>
               <!-- <a href="#">送出</a> -->
@@ -353,48 +356,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="card-footer p-0">
                 <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <h4 class="list-group-item list-group-item-light">
-                      花花
-                      <div class="float-right badge bg-warning" id="s_button">
-                        特休
-                        <input id="flower_reduce" type="text"></input>
-                      </div>
-                    </h4>
-                  </li>
-                  <li class="nav-item">
-                    <h4 class="list-group-item list-group-item-light">
-                      泡泡
-                      <div class="float-right badge bg-warning" id="s_button">
-                        特休
-                        <div id="pop_reduce">
-                          5
-                        </div>
-                      </div>
-                    </h4>
-                  </li>
-                  <li class="nav-item">
-                    <h4 class="list-group-item list-group-item-light">
-                      毛毛
-                      <div class="float-right badge bg-warning" id="s_button">
-                        特休
-                        <div id="green_reduce">
-                          8
-                        </div>
-                      </div>
-                    </h4>
-                  </li>
-                  <!-- <li class="nav-item">
-                    <h4 class="list-group-item list-group-item-light">
-                      莉莉
-                      <div class="float-right badge bg-warning" id="s_button">
-                        特休
-                        <div id="monkey_reduce" >
-                          6
-                        </div>
-                      </div>
-                    </h4>
-                  </li> -->
+                  <h4 class="list-group-item list-group-item-light">
+                    <input type="text" id="staffId" hidden>
+                    <span id="namela"></span>
+                    <br>
+                    <div class="float-right badge bg-danger" id="b_button">
+                      基本假
+                      <span id="b_reduce"></span>
+                    </div>
+                    <br>
+                    <div class="float-right badge bg-success" id="s_button">
+                      特休
+                      <span id="s_reduce"></span>
+                    </div>
+                    <br>
+                    <div class="float-right badge bg-primary" id="t_button">
+                      當年度事假 已使用
+                      <span id="t_reduce"></span>天
+                    </div>
+
+                  </h4>
 
                 </ul>
               </div>
@@ -436,6 +417,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <div class="form-form">
               <form id="eventForm">
+                <input id="type" hidden></input>
+                <input id="oldId" hidden></input>
                 <div class="form-group">
                   <label for="dateInput" class="control-label">日期</label>
                   <input type="text" class="from-control" id="dateInput" name="dateInput" readonly>
@@ -443,13 +426,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="form-group">
                   <label for="nameInput" class="control-label">姓名</label>
-                  <select type="text" class="from-control" id="nameInputla" name="nameInput">
-                    <option value="0">請選擇</option>
-                    <option value="tga001">陳花花</option>
-                    <option value="tga002">黃泡泡</option>
-                    <option value="tga003">林毛毛</option>
-
-                  </select>
+                  <span class="from-control" id="nameInputla"></span>
                 </div>
 
                 <div class="form-group">
@@ -466,10 +443,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <select type="text" class="from-control" id="relaxInputla" name="relaxInput">
                     <option value="0">請選擇</option>
                     <option value="b">基本假</option>
-                    <option value="s" id="s_reduce">特休</option>
+                    <option value="s">特休</option>
                     <option value="t">事假</option>
-                    <option value="o">其他
-                      <!-- 增加可輸入得格子 -->
+                    <option value="o">其他</option>
+
                   </select>
                 </div>
               </form>
@@ -526,7 +503,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- jQuery UI -->
   <script src="plugins/schedule.js/jquery-ui.min.js"></script>
 
-  <script src="plugins/schedule.js/event.js"></script>
+  <script src="/plugins/schedule.js/event.js"></script>
 </body>
+
 
 </html>
