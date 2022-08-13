@@ -2,7 +2,7 @@ let memberTable;
 window.onload = (e) => {
     // memberList initialization
     axios
-        .get("http://localhost:8080/yokult/api/0.02/member")
+        .get("http://localhost:8080/yokult/api/0.02/admin/member")
         .then((response) => {
             let members = response.data;
             console.log(members);
@@ -53,7 +53,7 @@ window.onload = (e) => {
         removeAllMembers();
         memberTable.clear();
         axios
-            .get("http://localhost:8080/yokult/api/0.02/member")
+            .get("http://localhost:8080/yokult/api/0.02/admin/member")
             .then((response) => {
                 let members = response.data;
                 console.log(members);
@@ -97,7 +97,9 @@ function search() {
             params["memEmail"] = searchValue;
     }
     axios
-        .get("http://localhost:8080/yokult/api/0.02/member/query", { params })
+        .get("http://localhost:8080/yokult/api/0.02/admin/member/query", {
+            params,
+        })
         .then((response) => {
             console.log(response);
             let members = response.data;
