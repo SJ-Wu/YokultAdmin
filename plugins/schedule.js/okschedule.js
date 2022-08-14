@@ -1,7 +1,7 @@
 $(function () {
   //getall當月班表
   $.ajax({
-    url: "http://localhost:8080/Yokult/getScheduleAllData",
+    url: "http://localhost:8080/yokult/getScheduleAllData",
     type: "POST", // GET | POST | PUT | DELETE
 
     success: function (rsp) {
@@ -42,28 +42,28 @@ $(function () {
     });
   }
   ini_events($("#external-events div.external-event"));
-  var Draggable = FullCalendar.Draggable;
-  var containerEl = document.getElementById("external-events");
+  // var Draggable = FullCalendar.Draggable;
+  // var containerEl = document.getElementById("external-events");
   var calendarEl = document.getElementById("calendar");
 
-  // initialize the external events---------------------------------------------------
-  new Draggable(containerEl, {
-    itemSelector: ".external-event",
-    eventData: function (eventEl) {
-      return {
-        title: eventEl.innerText,
-        backgroundColor: window
-          .getComputedStyle(eventEl, null)
-          .getPropertyValue("background-color"),
-        borderColor: window
-          .getComputedStyle(eventEl, null)
-          .getPropertyValue("background-color"),
-        textColor: window
-          .getComputedStyle(eventEl, null)
-          .getPropertyValue("color"),
-      };
-    },
-  });
+  // // initialize the external events---------------------------------------------------
+  // new Draggable(containerEl, {
+  //   itemSelector: ".external-event",
+  //   eventData: function (eventEl) {
+  //     return {
+  //       title: eventEl.innerText,
+  //       backgroundColor: window
+  //         .getComputedStyle(eventEl, null)
+  //         .getPropertyValue("background-color"),
+  //       borderColor: window
+  //         .getComputedStyle(eventEl, null)
+  //         .getPropertyValue("background-color"),
+  //       textColor: window
+  //         .getComputedStyle(eventEl, null)
+  //         .getPropertyValue("color"),
+  //     };
+  //   },
+  // });
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     //調月曆長度=============================
@@ -186,7 +186,7 @@ $(function () {
           dayoffcolor = "gray";
         } else if (relax == "t") {
           dayoffcolor = "blue";
-          reduce.innerHTML++;
+          reduce.innerHTML--;
         } else if (relax == "s") {
           dayoffcolor = "green";
           reduce.innerHTML--;
@@ -297,12 +297,12 @@ $(function () {
     // console.log(oldid);
     var reduce = document.getElementById(relax + "_reduce");
     if (relax == "b") {
-      reduce.innerHTML--;
     } else if (relax == "o") {
+      reduce.innerHTML++;
     } else if (relax == "t") {
-      reduce.innerHTML--;
+      reduce.innerHTML++;
     } else if (relax == "s") {
-      reduce.innerHTML--;
+      reduce.innerHTML++;
     }
 
     var deleteEvent = calendar.getEventById(oldEventId);

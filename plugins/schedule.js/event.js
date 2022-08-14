@@ -5,7 +5,7 @@ $(function () {
   };
 
   $.ajax({
-    url: "http://localhost:8080/Yokult/getStaffLevenData",
+    url: "http://localhost:8080/yokult/getStaffLevenData",
     type: "POST", // GET | POST | PUT | DELETE
     data: JSON.stringify(getId),
     contentType: "application/json",
@@ -70,9 +70,9 @@ $(function () {
     },
     showNonCurrentDates: false,
     //調月曆長度=============================
-    height: 530,
+    // height: 530,
     //轉中文================================
-    initalView: "dayGridMonth",
+    // initalView: "dayGridMonth",
     locale: "zh-tw",
     navlinks: true,
     //月曆頁面表頭，工具列===================
@@ -180,17 +180,15 @@ $(function () {
         //顏色分假別=================
         var dayoffcolor;
         var reduce = document.getElementById(relax + "_reduce");
+        reduce.innerHTML -= 0.5;
         if (relax == "b") {
           dayoffcolor = "red";
-          reduce.innerHTML -= 0.5;
         } else if (relax == "o") {
           dayoffcolor = "gray";
         } else if (relax == "t") {
           dayoffcolor = "blue";
-          reduce.innerHTML -= 0.5;
         } else if (relax == "s") {
           dayoffcolor = "green";
-          reduce.innerHTML -= 0.5;
         }
 
         //呈現資料===================
@@ -296,13 +294,11 @@ $(function () {
     var relax = oldEventId.substring(oldEventId.length - 1, oldEventId.length); //取最後一個值
     // console.log(oldid);
     var reduce = document.getElementById(relax + "_reduce");
+    reduce.innerHTML = parseFloat(reduce.innerHTML) + 0.5;
     if (relax == "b") {
-      reduce.innerHTML -= 0.5;
     } else if (relax == "o") {
     } else if (relax == "t") {
-      reduce.innerHTML -= 0.5;
     } else if (relax == "s") {
-      reduce.innerHTML -= 0.5;
     }
 
     var deleteEvent = calendar.getEventById(oldEventId);
@@ -330,7 +326,7 @@ $(function () {
       console.log($("#s_reduce").html()),
       console.log($("#t_reduce").html()),
       $.ajax({
-        url: "http://localhost:8080/Yokult/insertShiftSchedule",
+        url: "http://localhost:8080/yokult/insertShiftSchedule",
         type: "POST", // GET | POST | PUT | DELETE
         data: JSON.stringify(eventData),
         contentType: "application/json",

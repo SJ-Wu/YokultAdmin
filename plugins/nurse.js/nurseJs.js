@@ -3,7 +3,7 @@ $(document).ready(function () {
   // var qparts = url.split("?");
   var getId = { staff_id: "tga000" };
   $.ajax({
-    url: "http://localhost:8080/Yokult/getStaffAllData",
+    url: "http://localhost:8080/yokult/getStaffAllData",
     type: "POST", // GET | POST | PUT | DELETE
     data: JSON.stringify(getId),
     contentType: "application/json",
@@ -90,7 +90,7 @@ $("#newnurse").click(function () {
     };
 
     $.ajax({
-      url: "http://localhost:8080/Yokult/addOrModify",
+      url: "http://localhost:8080/yokult/addOrModify",
       type: "POST", // GET | POST | PUT | DELETE
       data: JSON.stringify(formData),
       contentType: "application/json",
@@ -130,7 +130,7 @@ function deleteFun(staffId) {
     if (result.isConfirmed) {
       var formdelete = { staff_id: staffId };
       $.ajax({
-        url: "http://localhost:8080/Yokult/deleteStaff",
+        url: "http://localhost:8080/yokult/deleteStaff",
         type: "POST", // GET | POST | PUT | DELETE
         data: JSON.stringify(formdelete),
         contentType: "application/json",
