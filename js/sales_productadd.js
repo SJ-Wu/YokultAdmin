@@ -20,7 +20,7 @@ window.onload = function () {
         e.preventDefault();
         const formData = new FormData(form);
         axios
-            .post("../api/0.01/product/uploadImage", formData, {
+            .post(URL + PRODUCT + "/uploadImage", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -48,7 +48,7 @@ window.onload = function () {
         product.proPrice = document.getElementById("proPrice").value;
         product.proPicture = proPicture ?? "";
         axios
-            .post("../api/0.01/product", product)
+            .post(URL + PRODUCT, product)
             .then((res) => {
                 let data = res.data;
                 console.log(res);
