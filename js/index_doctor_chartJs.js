@@ -2,6 +2,8 @@ $(function () {
   // $("textarea.textareaChart").val("");
   // 文字框隨內容自動增減
   let drID = "";
+  let doctorId1 = 1;
+  let doctorId2 = 2;
 
   $("textarea.textareaChart").css("resize", "none");
   $("textarea.textareaChart").on("keyup", function () {
@@ -99,13 +101,23 @@ $(function () {
         if (data.msg == "returnChart success") {
           $("textarea.chart").val("");
           // console.log(data.list.replace(/\\n/g, "<br>").replace(/\"/g, ""));
-          console.log(document.querySelector("#chart"));
+          // console.log(document.querySelector("#chart"));
+          // console.log(data.list);
+          if (data.list == "null") {
+            $("textarea.chart").val("尚未填寫病歷");
+            return;
+          }
           $("textarea.chart").val(
             data.list.replace(/\"/g, "").replace(/\\n/g, "\r\n")
           );
         } else {
           $("textarea.chart").val("");
         }
+
+        $("textarea.textareaChart").css(
+          "height",
+          $("textarea.textareaChart").prop("scrollHeight")
+        );
       },
     });
   });
@@ -117,6 +129,12 @@ $(function () {
     // if ($("*:invalid") == 0) {
     if (selectedDate == "請選擇日期") {
       $("textarea.chart").val("");
+      alert("請選擇日期");
+      return;
+    }
+    if ($("textarea.chart").val() == "") {
+      $("textarea.chart").val("");
+      alert("請填寫病歷");
       return;
     }
     $.ajax({
@@ -137,6 +155,85 @@ $(function () {
     });
     // }
   });
+  $("button.dr1").on("click", function () {
+    console.log($("button.dr1"));
+    $.ajax({
+      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/nextOne", // 資料請求的網址
+      type: "POST", // GET | POST | PUT | DELETE | PATCH
+      data: JSON.stringify({
+        doctorId: doctorId1,
+      }), // 將物件資料(不用雙引號) 傳送到指定的 url
+      dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
+      success: function (data) {
+        console.log(data.msg);
+        if (data.msg == "nextOne success") {
+          $("span.dr1").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+        } else if (data.msg == "finish") {
+          $("span.dr1").text("看診結束");
+        }
+      },
+    });
+  });
+
+  $("button.dr2").on("click", function () {
+    console.log("here in dr2 next one");
+    $.ajax({
+      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/nextOne", // 資料請求的網址
+      type: "POST", // GET | POST | PUT | DELETE | PATCH
+      data: JSON.stringify({
+        doctorId: doctorId2,
+      }), // 將物件資料(不用雙引號) 傳送到指定的 url
+      dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
+      success: function (data) {
+        console.log(data);
+        console.log(data.msg);
+        if (data.msg == "nextOne success") {
+          $("span.dr2").text(
+            `${data.checkinVO.bookingNumber}號 ${data.checkinVO.patientIdcard}`
+          );
+        } else if (data.msg == "finish") {
+          $("span.dr2").text("看診結束");
+        }
+      },
+    });
+  });
+
+  function init() {
+    $.ajax({
+      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/nowNum", // 資料請求的網址
+      type: "POST", // GET | POST | PUT | DELETE | PATCH
+      data: JSON.stringify({
+        doctorId: doctorId1,
+      }), // 將物件資料(不用雙引號) 傳送到指定的 url
+      dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
+      success: function (data) {
+        console.log(data.msg);
+        if (data.msg == "nowNum success") {
+          $("span.dr1").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+        } else if (data.msg == "no nowNum") {
+          $("span.dr1").text("--");
+        }
+      },
+    });
+    $.ajax({
+      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/nowNum", // 資料請求的網址
+      type: "POST", // GET | POST | PUT | DELETE | PATCH
+      data: JSON.stringify({
+        doctorId: doctorId2,
+      }),
+      dataType: "json",
+      success: function (data) {
+        console.log(data.msg);
+        if (data.msg == "nowNum success") {
+          $("span.dr2").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+        } else if (data.msg == "no nowNum") {
+          $("span.dr2").text("--");
+        }
+      },
+    });
+  }
+
+  init();
 
   setInterval(function () {
     // 現在日期時間
@@ -144,6 +241,6 @@ $(function () {
     var dateString = `叫號更新時間 : ${now.getFullYear()}/${
       now.getMonth() + 1
     }/${now.getDate()}  ${now.getHours()}: ${now.getMinutes()}: ${now.getSeconds()}`;
-    $("#time").html(dateString);
+    $(".time").html(dateString);
   }, 1000);
 });

@@ -17,12 +17,20 @@ $(function () {
         '<span class="text">預覽圖</span>';
     }
   });
+  // console.log(!!$(".preview_img").attr("src"));
 
   document.querySelector("#btn_submit").addEventListener("click", function () {
     var form_data = {};
-    form_data.img_base64 = document
-      .querySelector(".preview_img")
-      .getAttribute("src");
+    if (!!$(".preview_img").attr("src")) {
+      form_data.img_base64 = document
+        .querySelector(".preview_img")
+        .getAttribute("src");
+    }
+
+    if (form_data.img_base64 == "" || $("input.drName").val() == null) {
+      alert("資料未完成");
+      return;
+    }
     console.log(form_data.img_base64);
     // form_data.img_base64 = form_data.img_base64.substring(
     //   form_data.img_base64.indexOf(",") + 1
@@ -48,7 +56,13 @@ $(function () {
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
         console.log(data.msg);
-        alert("儲存成功!");
+        if (data.msg == "no name") {
+          alert("儲存失敗，沒有名字!");
+        } else if (data.msg == "no photo") {
+          alert("儲存失敗，沒有照片!");
+        } else {
+          alert("儲存成功!");
+        }
       },
     });
   });
@@ -66,10 +80,17 @@ $(function () {
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
         console.log(data.msg);
-        $("input.drName").val(data.doctor.doctorName);
-        document.querySelector(
-          "#preview"
-        ).innerHTML = `<img src="data:image/png;base64,${data.doctor.doctorPhoto}" class = "preview_img" >`;
+        if (!!data.doctor.doctorName) {
+          $("input.drName").val(data.doctor.doctorName);
+        }
+        if (!!data.doctor.doctorPhoto) {
+          document.querySelector(
+            "#preview"
+          ).innerHTML = `<img src="data:image/png;base64,${data.doctor.doctorPhoto}" class = "preview_img" >`;
+        } else {
+          document.querySelector("#preview").innerHTML =
+            '<span class="text">預覽圖</span>';
+        }
       },
     });
   });
