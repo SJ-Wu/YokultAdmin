@@ -244,7 +244,7 @@ $(function () {
 
   function ajaxForScheduleDrname(date1, date2) {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/drSchedule", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/drSchedule", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         date1: date1,
@@ -375,7 +375,7 @@ $(function () {
     });
     console.log(listOfPackage);
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/updateDrSchedule", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/doctor/updateDrSchedule", // 資料請求的網址
       type: "PUT", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         listOfDoctorSchedule: listOfPackage,

@@ -46,7 +46,7 @@ $(function () {
     console.log("here in #btn_submit click");
     console.log($("input.drName").val());
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/saveDr", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/doctor/saveDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: drID,
@@ -72,7 +72,7 @@ $(function () {
     // console.log($("select.dr"));
     let drID = option1.substring(option1.indexOf("0") + 2);
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/loadDr", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/doctor/loadDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: drID,
