@@ -348,9 +348,21 @@ $(function () {
         let tag = $("tr.weeekDate").children("td").eq(num);
         let year = $(tag).find("input").val();
         let date = $(tag).text().replace(/ /g, "");
-        console.log("here in find button");
-        // console.log(year);
-        let getdate = year + "-" + date;
+        let arr = date.split("/");
+        let monthadd;
+        let dateadd;
+        if (arr[0].length == 1) {
+          monthadd = "0" + arr[0];
+        } else {
+          monthadd = arr[0];
+        }
+        if (arr[1].length == 1) {
+          dateadd = "0" + arr[1];
+        } else {
+          dateadd = arr[1];
+        }
+        let getdate = year + "-" + monthadd + "-" + dateadd;
+        console.log(getdate);
         package.doctorScheduleDate = getdate.replace(/\//g, "-");
         package.doctorId = doctorId;
         package.doctorStatus = 1;
@@ -364,9 +376,20 @@ $(function () {
         let tag = $("tr.weeekDate").children("td").eq(num);
         let year = $(tag).find("input").val();
         let date = $(tag).text().replace(/ /g, "");
-        console.log("here in find button");
-        // console.log(year);
-        let getdate = year + "-" + date;
+        let arr = date.split("/");
+        let monthadd;
+        let dateadd;
+        if (arr[0].length == 1) {
+          monthadd = "0" + arr[0];
+        } else {
+          monthadd = arr[0];
+        }
+        if (arr[1].length == 1) {
+          dateadd = "0" + arr[1];
+        } else {
+          dateadd = arr[1];
+        }
+        let getdate = year + "-" + monthadd + "-" + dateadd;
         package.doctorScheduleDate = getdate.replace(/\//g, "-");
         package.doctorId = doctorId;
         package.doctorStatus = 0;
@@ -377,6 +400,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/updateDrSchedule", // 資料請求的網址
       type: "PUT", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         listOfDoctorSchedule: listOfPackage,
       }),

@@ -57,6 +57,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/getDrPatientDates", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: drID,
         patientIdcard: selectedID,
@@ -91,6 +92,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/returnChart", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: drID,
         patientIdcard: selectedID,
@@ -100,10 +102,8 @@ $(function () {
       success: function (data) {
         if (data.msg == "returnChart success") {
           $("textarea.chart").val("");
-          // console.log(data.list.replace(/\\n/g, "<br>").replace(/\"/g, ""));
-          // console.log(document.querySelector("#chart"));
-          // console.log(data.list);
-          if (data.list == "null") {
+
+          if (!data.list) {
             $("textarea.chart").val("尚未填寫病歷");
             return;
           }
@@ -140,6 +140,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/saveChart", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: drID,
         patientIdcard: selectedID,
@@ -160,12 +161,13 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/nextOne", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId1,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
-        console.log(data.msg);
+        // console.log(data.msg);
         if (data.msg == "nextOne success") {
           $("span.dr1").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
         } else if (data.msg == "finish") {
@@ -176,17 +178,17 @@ $(function () {
   });
 
   $("button.dr2").on("click", function () {
-    console.log("here in dr2 next one");
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/nextOne", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId2,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
-        console.log(data);
-        console.log(data.msg);
+        // console.log(data);
+        // console.log(data.msg);
         if (data.msg == "nextOne success") {
           $("span.dr2").text(
             `${data.checkinVO.bookingNumber}號 ${data.checkinVO.patientIdcard}`
@@ -202,14 +204,17 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId1,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
-        console.log(data.msg);
+        // console.log(data);
         if (data.msg == "nowNum success") {
-          $("span.dr1").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+          $("span.dr1").text(
+            `${data.checkinVO.bookingNumber}號 ${data.checkinVO.patientIdcard}`
+          );
         } else if (data.msg == "no nowNum") {
           $("span.dr1").text("--");
         }
@@ -218,14 +223,17 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId2,
       }),
       dataType: "json",
       success: function (data) {
-        console.log(data.msg);
+        // console.log(data.msg);
         if (data.msg == "nowNum success") {
-          $("span.dr2").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+          $("span.dr2").text(
+            `${data.checkinVO.bookingNumber}號 ${data.checkinVO.patientIdcard}`
+          );
         } else if (data.msg == "no nowNum") {
           $("span.dr2").text("--");
         }
