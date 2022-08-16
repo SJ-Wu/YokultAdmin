@@ -43,15 +43,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="submit" class="btn btn-block btn-outline-info" id="allSubmit">
+                            <!-- <button type="submit" class="btn btn-block btn-outline-info" id="allSubmit">
                                 送出
-                            </button>
+                            </button> -->
                         </ol>
                     </div>
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
-
                 <!-- Main content -->
                 <div class="row">
                     <!-- <div class="col"> -->
@@ -74,74 +73,72 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.Main content -->
         </div>
         <!-- /.content-header -->
-    </div>
-    <!-- /.content-wrapper -->
 
-    <!-- 點選日期，跳出的表單 -->
-    <div class="modal fade" id="eventFormModal" tabindex="-1" role="dialog" aria-labelledby="eventFormModal"
-        data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>編輯</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="inputxxx">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <h4 class="modal-title" id="eventFormModalTitle"></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-form">
-                        <form id="eventForm">
-                            <input id="type" hidden></input>
-                            <input id="oldId" hidden></input>
-                            <div class="form-group">
-                                <label for="dateInput" class="control-label">日期</label>
-                                <input type="text" class="from-control" id="dateInput" name="dateInput" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="nameInput" class="control-label">姓名</label>
-                                <span class="from-control" id="nameInputla">花花</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="eventTimeInput" class="control-label">班別</label>
-                                <select type="text" class="from-control" id="eventTimeInputla" name="eventTimeInput">
-                                    <option value="0">請選擇</option>
-                                    <option value="am">早班</option>
-                                    <option value="pm">晚班</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="relaxInput" class="control-label">假別</label>
-                                <select type="text" class="from-control" id="relaxInputla" name="relaxInput">
-                                    <option value="0">請選擇</option>
-                                    <option value="b">基本假</option>
-                                    <option value="s">特休</option>
-                                    <option value="t">事假</option>
-                                    <option value="o">其他</option>
-                                </select>
-                            </div>
-                        </form>
+        <!-- 點選日期，跳出的表單 -->
+        <div class="modal fade" id="eventFormModal" tabindex="-1" role="dialog" aria-labelledby="eventFormModal"
+            data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>編輯</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="inputxxx">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <h4 class="modal-title" id="eventFormModalTitle"></h4>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                        id="eventFormButtonCancel">取消</button>
-                    <button type="button" class="btn btn-primary" id="eventFormButtonsure">確定</button>
-                    <button type="button" class="btn btn-danger" id="eventFormButtonreremove">刪除</button>
+                    <div class="modal-body">
+                        <div class="form-form">
+                            <form id="eventForm">
+                                <input id="type" hidden></input>
+                                <input id="oldId" hidden></input>
+                                <div class="form-group">
+                                    <label for="dateInput" class="control-label">日期</label>
+                                    <input type="text" class="from-control" id="dateInput" name="dateInput" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nameInput" class="control-label">姓名</label>
+                                    <span class="from-control" id="nameInputla">花花</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventTimeInput" class="control-label">班別</label>
+                                    <select type="text" class="from-control" id="eventTimeInputla"
+                                        name="eventTimeInput">
+                                        <option value="0">請選擇</option>
+                                        <option value="am">早班</option>
+                                        <option value="pm">晚班</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="relaxInput" class="control-label">假別</label>
+                                    <select type="text" class="from-control" id="relaxInputla" name="relaxInput">
+                                        <option value="0">請選擇</option>
+                                        <option value="b">基本假</option>
+                                        <option value="s">特休</option>
+                                        <option value="t">事假</option>
+                                        <option value="o">其他</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                            id="eventFormButtonCancel">取消</button>
+                        <button type="button" class="btn btn-primary" id="eventFormButtonsure">確定</button>
+                        <button type="button" class="btn btn-danger" id="eventFormButtonreremove">刪除</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /點選日期，跳出的表單 -->
-    <!-- ============ Footer段落 ============ -->
-    <footer id="footer" class="main-footer"></footer>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-    <!-- ============ Footer段落 ============ -->
-    <!-- /.主開發區塊content-wrapper -->
+        <!-- /點選日期，跳出的表單 -->
+        <!-- ============ Footer段落 ============ -->
+        <footer id="footer" class="main-footer"></footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- ============ Footer段落 ============ -->
+        <!-- /.content-wrapper -->
     </div>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -155,7 +152,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="js/adminlte.min.js"></script>
     <!-- fullCalendar 5.10.1 -->
     <script src="plugins/schedule.js/moment.min.js"></script>
-    <!--  -->
     <script src="js/main.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="plugins/schedule.js/demo.js"></script>
@@ -165,6 +161,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/plugins/schedule.js/okschedule.js"></script>
 
     <script src="js/importHeader.js"></script>
+
+    <script src="js/jwt.js"></script>
 
 </body>
 

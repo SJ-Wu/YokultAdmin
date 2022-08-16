@@ -47,8 +47,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <button type="submit" class="btn btn-block btn-outline-info" id="SubmitSchedule">產出班表</button>
               </div>
               <button type="submit" class="btn btn-block btn-outline-info" id="allSubmit">送出</button>
-              <!-- <a href="#">送出</a> -->
-              <!-- <li class="breadcrumb-item active">保留</li> -->
+              <div>
+                <button type="button" id="fastInput" class="btn btn-outline-dark">自動填入</button>
+              </div>
             </ol>
           </div>
           <!-- /.col -->
@@ -60,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="row">
           <!-- <div class="col"> -->
           <div class="col-lg-3">
-            <div class="card card-widget widget-user-2">
+            <div class="card card-widget widget-user-2" id="widget-user-2">
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header bg-info">
                 <!-- /.widget-user-image -->
@@ -88,9 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <span id="t_reduce"></span>天
                     </div>
                   </h4>
-                  <div>
-                    <button type="button" id="fastInput" class="btn btn-outline-dark">自動填入</button>
-                  </div>
+
                 </ul>
               </div>
             </div>
@@ -133,6 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <form id="eventForm">
                 <input id="type" hidden></input>
                 <input id="oldId" hidden></input>
+                <input id="modalStaffId" hidden></input>
                 <div class="form-group">
                   <label for="dateInput" class="control-label">日期</label>
                   <input type="text" class="from-control" id="dateInput" name="dateInput" readonly>
@@ -210,6 +210,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="/plugins/schedule.js/event.js"></script>
 
   <script src="js/importHeader.js"></script>
+
+  <script src="js/jwt.js"></script>
 
 </body>
 

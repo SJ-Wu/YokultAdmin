@@ -1,18 +1,21 @@
 $(function () {
+  let jwt = parseJwt(sessionStorage.getItem("token"));
+  let staffId = jwt["sub"];
+
   //getall當月班表
   $.ajax({
     url: "http://localhost:8080/yokult/getScheduleAllData",
     type: "POST", // GET | POST | PUT | DELETE
 
     success: function (rsp) {
-      console.log(rsp);
+      // console.log(rsp);
       rsp.forEach((schedule) => {
         if (schedule.apm == "a") {
           var color = "blue";
         } else if (schedule.apm == "p") {
           var color = "red";
         }
-        console.log(schedule);
+        // console.log(schedule);
         var nameInputla = $("#nameInputla");
         var dateInput = $("#dateInput");
         var optiontime = $("#eventTimeInputla option:selected");
@@ -23,7 +26,7 @@ $(function () {
           title: schedule.workStaff,
           allDay: true,
           start: schedule.schedule_date,
-          color: color,
+          // color: color,
         };
 
         calendar.addEvent(myEvent);
@@ -42,30 +45,10 @@ $(function () {
     });
   }
   ini_events($("#external-events div.external-event"));
-  // var Draggable = FullCalendar.Draggable;
-  // var containerEl = document.getElementById("external-events");
   var calendarEl = document.getElementById("calendar");
 
-  // // initialize the external events---------------------------------------------------
-  // new Draggable(containerEl, {
-  //   itemSelector: ".external-event",
-  //   eventData: function (eventEl) {
-  //     return {
-  //       title: eventEl.innerText,
-  //       backgroundColor: window
-  //         .getComputedStyle(eventEl, null)
-  //         .getPropertyValue("background-color"),
-  //       borderColor: window
-  //         .getComputedStyle(eventEl, null)
-  //         .getPropertyValue("background-color"),
-  //       textColor: window
-  //         .getComputedStyle(eventEl, null)
-  //         .getPropertyValue("color"),
-  //     };
-  //   },
-  // });
-
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    showNonCurrentDates: false,
     //調月曆長度=============================
     // height: 530,
     //轉中文================================
@@ -84,49 +67,49 @@ $(function () {
     themeSystem: "bootstrap",
 
     //選擇日期，跳表單框==================================
-    dateClick: function (data) {
-      document.getElementById("type").value = "new";
-      document.getElementById("eventFormButtonreremove").hidden = true;
-      $("#dateInput").val(moment(data.date).format("YYYY-MM-DD")); //事件日期，預設填入被點選的日期，不得修改
-      if (addevenDayForTwo(data)) {
-        //顯示編輯畫面事件
-        $("#eventFormModal").modal("show"); //顯示編輯視窗，供使用者編輯
-      }
-    },
+    // dateClick: function (data) {
+    //   document.getElementById("type").value = "new";
+    //   document.getElementById("eventFormButtonreremove").hidden = true;
+    //   $("#dateInput").val(moment(data.date).format("YYYY-MM-DD")); //事件日期，預設填入被點選的日期，不得修改
+    //   if (addevenDayForTwo(data)) {
+    //     //顯示編輯畫面事件
+    //     $("#eventFormModal").modal("show"); //顯示編輯視窗，供使用者編輯
+    //   }
+    // },
 
     //月曆上 事件點擊 表單======================================
-    eventClick: function (dataxxx) {
-      document.getElementById("type").value = "update";
-      document.getElementById("eventFormButtonreremove").hidden = false; //刪除鍵修改表單 顯示
-      console.log(dataxxx);
-      var APm = dataxxx.event._def.title;
-      APm = APm.substring(APm.length - 2, APm.length); //取最後兩個值
-      var leaveType = dataxxx.event._def.ui.backgroundColor;
-      if (APm == "早班") {
-        document.querySelector("#eventTimeInputla").value = "am";
-      } else {
-        document.querySelector("#eventTimeInputla").value = "pm";
-      }
+    // eventClick: function (dataxxx) {
+    //   document.getElementById("type").value = "update";
+    //   document.getElementById("eventFormButtonreremove").hidden = false; //刪除鍵修改表單 顯示
+    //   console.log(dataxxx);
+    //   var APm = dataxxx.event._def.title;
+    //   APm = APm.substring(APm.length - 2, APm.length); //取最後兩個值
+    //   var leaveType = dataxxx.event._def.ui.backgroundColor;
+    //   if (APm == "早班") {
+    //     document.querySelector("#eventTimeInputla").value = "am";
+    //   } else {
+    //     document.querySelector("#eventTimeInputla").value = "pm";
+    //   }
 
-      if (leaveType == "red") {
-        document.querySelector("#relaxInputla").value = "b";
-      } else if (leaveType == "gray") {
-        document.querySelector("#relaxInputla").value = "o";
-      } else if (leaveType == "blue") {
-        document.querySelector("#relaxInputla").value = "t";
-      } else if (leaveType == "green") {
-        document.querySelector("#relaxInputla").value = "s";
-      }
+    //   if (leaveType == "red") {
+    //     document.querySelector("#relaxInputla").value = "b";
+    //   } else if (leaveType == "gray") {
+    //     document.querySelector("#relaxInputla").value = "o";
+    //   } else if (leaveType == "blue") {
+    //     document.querySelector("#relaxInputla").value = "t";
+    //   } else if (leaveType == "green") {
+    //     document.querySelector("#relaxInputla").value = "s";
+    //   }
 
-      var eventDate = dataxxx.event._instance.range.start;
-      $("#dateInput").val(moment(eventDate).format("YYYY-MM-DD")); //事件日期
-      var oldName = $("#nameInputla").text();
-      var oldDate = moment(eventDate).format("YYYY-MM-DD");
-      var oldTime = document.querySelector("#eventTimeInputla").value;
-      var oldLeaveType = document.querySelector("#relaxInputla").value;
-      $("#oldId").val(oldName + oldDate + oldTime + oldLeaveType);
-      $("#eventFormModal").modal("show");
-    },
+    //   var eventDate = dataxxx.event._instance.range.start;
+    //   $("#dateInput").val(moment(eventDate).format("YYYY-MM-DD")); //事件日期
+    //   var oldName = $("#nameInputla").text();
+    //   var oldDate = moment(eventDate).format("YYYY-MM-DD");
+    //   var oldTime = document.querySelector("#eventTimeInputla").value;
+    //   var oldLeaveType = document.querySelector("#relaxInputla").value;
+    //   $("#oldId").val(oldName + oldDate + oldTime + oldLeaveType);
+    //   $("#eventFormModal").modal("show");
+    // }
   });
 
   // 一天，畫假上限兩人===============================
@@ -177,20 +160,20 @@ $(function () {
         // alert(errorMsg);
       } else {
         //顏色分假別=================
-        var dayoffcolor;
-        var reduce = document.getElementById(relax + "_reduce");
-        if (relax == "b") {
-          dayoffcolor = "red";
-          reduce.innerHTML--;
-        } else if (relax == "o") {
-          dayoffcolor = "gray";
-        } else if (relax == "t") {
-          dayoffcolor = "blue";
-          reduce.innerHTML--;
-        } else if (relax == "s") {
-          dayoffcolor = "green";
-          reduce.innerHTML--;
-        }
+        // var dayoffcolor;
+        // var reduce = document.getElementById(relax + "_reduce");
+        // if (relax == "b") {
+        //   dayoffcolor = "red";
+        //   reduce.innerHTML--;
+        // } else if (relax == "o") {
+        //   dayoffcolor = "gray";
+        // } else if (relax == "t") {
+        //   dayoffcolor = "blue";
+        //   reduce.innerHTML--;
+        // } else if (relax == "s") {
+        //   dayoffcolor = "green";
+        //   reduce.innerHTML--;
+        // }
 
         //呈現資料===================
         var myEvent = {
@@ -240,35 +223,35 @@ $(function () {
       }
     }
 
-    var optiontime = $("#eventTimeInputla option:selected");
-    var optionrelax = $("#relaxInputla option:selected");
-    var reduce = document.getElementById(relax + "_reduce");
-    if (relax == "b") {
-      if (reduce.innerHTML == 0) {
-        alert("基本假已使用完，請選擇其他假別");
-        document.querySelector("#relaxInputla").value = 0;
-        return true;
-      }
-    } else if (relax == "s") {
-      if (reduce.innerHTML == 0) {
-        alert("特休已使用完，請選擇其他假別");
-        document.querySelector("#relaxInputla").value = 0;
-        return true;
-      }
-    } else if (relax == "t") {
-      if (reduce.innerHTML >= 14) {
-        alert("當年度事假已使用完，請選擇其他假別");
-        document.querySelector("#relaxInputla").value = 0;
-        return true;
-      }
-    }
-    if (optiontime.val() == "0") {
-      alert("請選擇正確班別");
-      return true;
-    } else if (optionrelax.val() == "0") {
-      alert("請選擇正確假別");
-      return true;
-    }
+    // var optiontime = $("#eventTimeInputla option:selected");
+    // var optionrelax = $("#relaxInputla option:selected");
+    // var reduce = document.getElementById(relax + "_reduce");
+    // if (relax == "b") {
+    //   if (reduce.innerHTML == 0) {
+    //     alert("基本假已使用完，請選擇其他假別");
+    //     document.querySelector("#relaxInputla").value = 0;
+    //     return true;
+    //   }
+    // } else if (relax == "s") {
+    //   if (reduce.innerHTML == 0) {
+    //     alert("特休已使用完，請選擇其他假別");
+    //     document.querySelector("#relaxInputla").value = 0;
+    //     return true;
+    //   }
+    // } else if (relax == "t") {
+    //   if (reduce.innerHTML >= 14) {
+    //     alert("當年度事假已使用完，請選擇其他假別");
+    //     document.querySelector("#relaxInputla").value = 0;
+    //     return true;
+    //   }
+    // }
+    // if (optiontime.val() == "0") {
+    //   alert("請選擇正確班別");
+    //   return true;
+    // } else if (optionrelax.val() == "0") {
+    //   alert("請選擇正確假別");
+    //   return true;
+    // }
     return false;
   }
 
@@ -296,14 +279,14 @@ $(function () {
     var relax = oldEventId.substring(oldEventId.length - 1, oldEventId.length); //取最後一個值
     // console.log(oldid);
     var reduce = document.getElementById(relax + "_reduce");
-    if (relax == "b") {
-    } else if (relax == "o") {
-      reduce.innerHTML++;
-    } else if (relax == "t") {
-      reduce.innerHTML++;
-    } else if (relax == "s") {
-      reduce.innerHTML++;
-    }
+    // if (relax == "b") {
+    // } else if (relax == "o") {
+    //   reduce.innerHTML++;
+    // } else if (relax == "t") {
+    //   reduce.innerHTML++;
+    // } else if (relax == "s") {
+    //   reduce.innerHTML++;
+    // }
 
     var deleteEvent = calendar.getEventById(oldEventId);
     deleteEvent.remove();

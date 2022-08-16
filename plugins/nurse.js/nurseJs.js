@@ -1,7 +1,12 @@
-$(document).ready(function () {
-  // var url = window.location.href;
-  // var qparts = url.split("?");
-  var getId = { staff_id: "tga000" };
+$(function () {
+  let jwt = parseJwt(sessionStorage.getItem("token"));
+  var staffId = jwt["sub"];
+  console.log(staffId);
+  if ("tga000" != staffId) {
+    checkPermission();
+  }
+
+  var getId = { staff_id: staffId };
   $.ajax({
     url: "http://localhost:8080/yokult/getStaffAllData",
     type: "POST", // GET | POST | PUT | DELETE
@@ -14,7 +19,7 @@ $(document).ready(function () {
         staff.staff_birthday = moment(staff.staff_birthday).format(
           "YYYY-MM-DD"
         );
-        allNurseHtml += addList(staff);
+        allNurseHtml += addList(staff, staffId);
       });
       $("#staffList").html(allNurseHtml);
     },
@@ -23,8 +28,11 @@ $(document).ready(function () {
     },
   });
 });
-function addList(staff) {
-  let nurseHtml = `<div class="content" id=${staff["staff_id"]}>
+
+function addList(staff, staffId) {
+  let nurseHtml;
+  if ("tga000" == staffId) {
+    nurseHtml = `<div class="content" id=${staff["staff_id"]}>
                         <div div class="container-fluid" >
                             <div class="row">
                               <div class="col-md-12">
@@ -63,8 +71,47 @@ function addList(staff) {
                             </div>
                           </div >
                         </div > `;
+  } else {
+    nurseHtml = `<div class="content" id=${staff["staff_id"]}>
+                        <div div class="container-fluid" >
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="card card-primary">
+                                  <div class="card-header">
+                                    <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div class="card-main">
+                                    <div class="card-body-my">
+                                      <img class="img-img" src="data:image/png;base64,${staff["staff_picture"]}" alt="照片"/>
+                                    </div>
+                                    <div class="card-text-my">
+                                      <h3>姓名:<span id="${staff["staff_id"]}_name">${staff["staff_name"]}</span></h3>
+                                      <br />
+                                      <h5>信箱: <span id="${staff["staff_id"]}_email">${staff["staff_email"]}</span></h5>
+                                      <h5>身分證字號: <span id="${staff["staff_id"]}_idnumber">${staff["staff_idnumber"]}</span></h5>
+                                      <h5>生日:<span id="${staff["staff_id"]}_birthday">${staff["staff_birthday"]}</span></h5>
+                                      <h5>手機: <span id="${staff["staff_id"]}_phone">${staff["staff_phone"]}</span></h5>
+                                      <div id="jsonTip"></div>
+                                    </div>
+                                    <div class="card-button">
+                                      <div class="button-btn">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div >
+                        </div > `;
+  }
+
   return nurseHtml;
 }
+
 //自動填入
 $("#fastInput").click(function () {
   $("#recipient-name").val("李四");
@@ -119,48 +166,28 @@ $("#newnurse").click(function () {
 
 //刪除
 function deleteFun(staffId) {
-  Swal.fire({
-    title: "確認移除?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "刪除!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      var formdelete = { staff_id: staffId };
-      $.ajax({
-        url: "http://localhost:8080/yokult/deleteStaff",
-        type: "POST", // GET | POST | PUT | DELETE
-        data: JSON.stringify(formdelete),
-        contentType: "application/json",
-        success: function (response) {
-          if (response == "success") {
-            $("#" + staffId).remove();
-            Swal.fire(
-              //三八提示窗
-              "刪除成功",
-              "",
-              "success" //另可指定 info,warring,error,success
-            ).then((result) => {
-              if (result.isConfirmed) {
-                location.reload();
-              }
-            });
-          } else {
-            Swal.fire(
-              "刪除失敗",
-              "",
-              "error" //另可指定 info,warring,error,success
-            );
-          }
-        },
-        error: function (xhr) {
-          alert("發生錯誤: " + xhr.status + " " + xhr.statusText);
-        },
-      });
-    }
-  });
+  var checkDelete = confirm("確認移除?");
+  if (checkDelete) {
+    var formdelete = { staff_id: staffId };
+    $.ajax({
+      url: "http://localhost:8080/yokult/deleteStaff",
+      type: "POST", // GET | POST | PUT | DELETE
+      data: JSON.stringify(formdelete),
+      contentType: "application/json",
+      success: function (response) {
+        if (response == "success") {
+          $("#" + staffId).remove();
+          alert("刪除成功");
+          location.reload();
+        } else {
+          alert("刪除失敗");
+        }
+      },
+      error: function (xhr) {
+        alert("發生錯誤: " + xhr.status + " " + xhr.statusText);
+      },
+    });
+  }
 }
 
 //修改
@@ -217,3 +244,7 @@ $("#the_file").change(function (e) {
   };
   reader.readAsDataURL(file);
 });
+
+function checkPermission() {
+  $("#add").hide();
+}
