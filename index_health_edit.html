@@ -77,80 +77,78 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form>
-                                        <div class="card-body" id="topic_edit">
-                                            <div class="form-group">
-                                                <label for="topic_title"
-                                                    >文章標題</label
-                                                >
-                                                <input
-                                                    type="text"
-                                                    name="topic_title"
-                                                    class="form-control"
-                                                    id="topic_title"
-                                                    placeholder="請輸入文章標題"
-                                                />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="topic_foreword"
-                                                    >文章引言</label
-                                                >
-                                                <input
-                                                    type="text"
-                                                    name="title"
-                                                    class="form-control"
-                                                    id="topic_foreword"
-                                                    placeholder="請輸入文章引言"
-                                                />
-                                            </div>
-                                            <label for="genrelist"
-                                                >選擇文章的種類：</label
+                                    <div class="card-body" id="topic_edit">
+                                        <div class="form-group">
+                                            <label for="topic_title"
+                                                >文章標題</label
                                             >
-                                            <select id="genrelist">
-                                                <option value="topic1">
-                                                    牙周衛教
-                                                </option>
-                                                <option value="topic2">
-                                                    牙齒保健
-                                                </option>
-                                                <option value="topic3">
-                                                    美白衛教
-                                                </option>
-                                                <option value="topic4">
-                                                    拔牙衛教
-                                                </option>
-                                                <option value="topic5">
-                                                    根管治療
-                                                </option>
-                                                <option value="topic6">
-                                                    矯正衛教
-                                                </option>
-                                                <option value="topic7">
-                                                    兒童衛教
-                                                </option>
-                                            </select>
+                                            <input
+                                                type="text"
+                                                name="topic_title"
+                                                class="form-control"
+                                                id="topic_title"
+                                                placeholder="請輸入文章標題"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="topic_foreword"
+                                                >文章引言</label
+                                            >
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                class="form-control"
+                                                id="topic_foreword"
+                                                placeholder="請輸入文章引言"
+                                            />
+                                        </div>
+                                        <label for="genrelist"
+                                            >選擇文章的種類：</label
+                                        >
+                                        <select id="genrelist">
+                                            <option value="topic1">
+                                                牙周衛教
+                                            </option>
+                                            <option value="topic2">
+                                                牙齒保健
+                                            </option>
+                                            <option value="topic3">
+                                                美白衛教
+                                            </option>
+                                            <option value="topic4">
+                                                拔牙衛教
+                                            </option>
+                                            <option value="topic5">
+                                                根管治療
+                                            </option>
+                                            <option value="topic6">
+                                                矯正衛教
+                                            </option>
+                                            <option value="topic7">
+                                                兒童衛教
+                                            </option>
+                                        </select>
 
-                                            <!--文章輸入欄位-->
-                                            <p>
-                                                <textarea
-                                                    name="content"
-                                                    class="form-control"
-                                                    id="topic_content"
-                                                    cols="115"
-                                                    rows="10"
-                                                ></textarea>
-                                            </p>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary"
-                                            >
-                                                送出
-                                            </button>
-                                        </div>
-                                    </form>
+                                        <!--文章輸入欄位-->
+                                        <p>
+                                            <textarea
+                                                name="content"
+                                                class="form-control"
+                                                id="topic_content"
+                                                cols="115"
+                                                rows="10"
+                                            ></textarea>
+                                        </p>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button
+                                            id="btn_topic_save"
+                                            class="btn btn-primary"
+                                        >
+                                            送出
+                                        </button>
+                                    </div>
                                 </div>
                                 <!-- /.card -->
                             </div>
@@ -181,7 +179,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="js/adminlte.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="js/importHeader.js"></script>
+        <script src="js/apiPath.js"></script>
         <script src="js/health_edit.js"></script>
     </body>
 </html>
