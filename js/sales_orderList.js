@@ -7,37 +7,6 @@ window.onload = function () {
         let orderid = $(this).closest("tr").find("td").eq(0).text();
         console.log(orderid);
         getOrderlist(orderid);
-        // $.ajax({
-        //     url: "http://localhost:8080/Proj_Yokult/api/0.01/order/selectOrderid", // 資料請求的網址
-        //     type: "GET", // GET | POST | PUT | DELETE | PATCH
-        //     data: { ordId: orderid },
-        //     dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
-        //     success: function (data) {
-        //         // console.log(data);
-        //         if (data.msg == "success") {
-        //             $("tbody.abc").html("");
-        //             //清空原資料後開始迴圈
-
-        //             $("tbody.abc").append(`<tr>
-        //               <td>${data.order.ordid}</td>
-        //               <td>${data.order.memid}</td>
-        //               <td>${data.order.paymethod}</td>
-        //               <td>${data.order.orderstatus}</td>
-        //               <td>${data.order.addr}</td>
-        //               <td>${data.order.receipter}</td>
-
-        //               <td>${data.order.shoptime}</td>
-        //               <td>${data.order.cellphone}</td>
-        //               <td>${data.order.phone}</td>
-        //               <td>
-        //                   <button class="check btn-xs btn-light" data-toggle="modal"
-        //                       data-target="#editProduct">
-        //                       查看詳情</button>
-        //               </td>
-        //           </tr>`);
-        //         }
-        //     },
-        // });
     });
 
     init();
@@ -47,8 +16,9 @@ window.onload = function () {
         }
         console.log($("#ordidInput").val());
         $.ajax({
-            url: "http://localhost:8080/Proj_Yokult/api/0.01/order/selectOrderid", // 資料請求的網址
+            url: "http://localhost:8080/yokult/api/0.01/order/selectOrderid", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
+            contentType: "application/json",
             data: JSON.stringify({
                 ordid: $("#ordidInput").val(),
             }),
@@ -126,8 +96,9 @@ window.onload = function () {
         };
         console.log(statusSend);
         $.ajax({
-            url: "http://localhost:8080/Proj_Yokult/api/0.01/order/selectOrderStatus", // 資料請求的網址
+            url: "http://localhost:8080/yokult/api/0.01/order/selectOrderStatus", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
+            contentType: "application/json",
             data: JSON.stringify({
                 orderstatus: statusSend,
             }),
@@ -165,8 +136,23 @@ window.onload = function () {
 };
 
 function init() {
+    const orderstatusMap = {
+        //Map=映射，訂單狀態從英文狀態
+        arrearage: "待付款",
+        processing: "處理中",
+        delivery: "配送中",
+        complete: "完成訂單",
+        cancel: "取消訂單",
+        return: "退貨/退款",
+    };
+    const paymethodMap = {
+        //Map=映射，付款方式英文狀態
+        cash: "現金",
+        creditcard: "信用卡",
+        payment: "電子支付",
+    };
     $.ajax({
-        url: "http://localhost:8080/Proj_Yokult/api/0.01/order/", // 資料請求的網址
+        url: "http://localhost:8080/yokult/api/0.01/order/", // 資料請求的網址
         type: "GET", // GET | POST | PUT | DELETE | PATCH
         // data: {
         // },
@@ -180,8 +166,8 @@ function init() {
                     $("tbody.abc").append(`<tr>
                   <td>${item.ordid}</td>
                   <td>${item.memid}</td>
-                  <td>${item.paymethod}</td>
-                  <td>${item.orderstatus}</td>
+                  <td>${paymethodMap[item.paymethod]}</td>
+                  <td>${orderstatusMap[item.orderstatus]}</td>
                   <td>${item.addr}</td>
                   <td>${item.receipter}</td>
                   
@@ -249,9 +235,12 @@ function getOrderlist(ordId) {
     let requestOptions = {
         method: "GET",
         redirect: "follow",
+        headers: new Headers({
+            "Content-Type": "application/json",
+        }),
     };
 
-    let url = new URL("http://localhost:8080/Proj_Yokult/api/0.01/orderlist/");
+    let url = new URL("http://localhost:8080/yokult/api/0.01/orderlist/");
     if (ordId !== null && ordId !== "") {
         url.searchParams.append("ordId", ordId);
     }
@@ -326,10 +315,7 @@ function saveProduct() {
         redirect: "follow",
     };
 
-    fetch(
-        "http://localhost:8080/Proj_Yokult/api/0.01/orderlist/",
-        requestOptions
-    )
+    fetch("http://localhost:8080/yokult/api/0.01/orderlist/", requestOptions)
         .then((response) => response.text())
         .then((result) => search())
         .catch((error) => console.log("error", error));
