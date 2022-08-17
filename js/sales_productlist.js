@@ -20,7 +20,7 @@ function getProducts(productName, category) {
     redirect: "follow",
   };
 
-  let url = new URL("http://localhost:8080/Proj_Yokult/api/0.01/product/");
+  let url = new URL(YOKULT_URL + PRODUCT);
   if (productName != null && productName != "") {
     url.searchParams.append("productName", productName);
   }
@@ -106,12 +106,16 @@ function saveProduct() {
   });
 
   var requestOptions = {
-    method: "POST",
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
     body: raw,
     redirect: "follow",
   };
 
-  fetch("http://localhost:8080/Proj_Yokult/api/0.01/product/", requestOptions)
+  fetch(YOKULT_URL + PRODUCT, requestOptions)
     .then((response) => response.text())
     .then((result) => search())
     .catch((error) => console.log("error", error));
