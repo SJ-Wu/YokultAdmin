@@ -25,10 +25,30 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="login-out" href="#" role="button">
+            <a
+                class="nav-link"
+                id="logout"
+                data-widget="login-out"
+                href="#"
+                role="button"
+            >
                 <i class="fas fa-arrow-right-from-bracket"></i>
             </a>
         </li>
     </ul>
 </nav>
+<script>
+    $("#logout").on("click", () => {
+        if (sessionStorage.getItem("token")) {
+            alert("登出成功，歡迎下次再來。");
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("staff_id");
+            setTimeout(() => {
+                window.location.replace("index.html");
+            }, 3000);
+        } else {
+            alert("請先登入，謝謝");
+        }
+    });
+</script>
 <!-- /.navbar -->
