@@ -12,7 +12,7 @@ $(function () {
   };
 
   $.ajax({
-    url: "http://localhost:8080/yokult/getStaffLevenData",
+    url: YOKULT_URL + "/getStaffLevenData",
     type: "POST", // GET | POST | PUT | DELETE
     data: JSON.stringify(getId),
     contentType: "application/json",
@@ -87,10 +87,7 @@ $(function () {
     },
 
     showNonCurrentDates: false,
-    //調月曆長度=============================
-    // height: 530,
     //轉中文================================
-    // initalView: "dayGridMonth",
     locale: "zh-tw",
     navlinks: true,
     //月曆頁面表頭，工具列===================
@@ -346,7 +343,7 @@ $(function () {
     };
 
     $.ajax({
-      url: "http://localhost:8080/yokult/insertShiftSchedule",
+      url: "/insertShiftSchedule",
       type: "POST", // GET | POST | PUT | DELETE
       data: JSON.stringify(eventData),
       contentType: "application/json",
@@ -378,7 +375,7 @@ $(function () {
     };
 
     $.ajax({
-      url: "http://localhost:8080/yokult/autoMakeSchedule",
+      url: YOKULT_URL + "/autoMakeSchedule",
       type: "POST", // GET | POST | PUT | DELETE
       data: JSON.stringify(eventData),
       contentType: "application/json",
@@ -505,6 +502,14 @@ $(function () {
     myEvent = {
       id: "tga003" + "林毛毛" + "2022-09-11" + "pm" + "b",
       title: "林毛毛_" + "晚班",
+      allDay: true,
+      start: "2022-09-11",
+      color: "red",
+    };
+    calendar.addEvent(myEvent);
+    myEvent = {
+      id: "tga002" + "黃泡泡" + "2022-09-11" + "pm" + "b",
+      title: "黃泡泡_" + "晚班",
       allDay: true,
       start: "2022-09-11",
       color: "red",

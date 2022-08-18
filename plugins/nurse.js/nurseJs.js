@@ -8,7 +8,7 @@ $(function () {
 
   var getId = { staff_id: staffId };
   $.ajax({
-    url: "http://localhost:8080/yokult/getStaffAllData",
+    url: YOKULT_URL + "/getStaffAllData",
     type: "POST", // GET | POST | PUT | DELETE
     data: JSON.stringify(getId),
     contentType: "application/json",
@@ -108,6 +108,7 @@ function addList(staff, staffId) {
                           </div >
                         </div > `;
   }
+
   return nurseHtml;
 }
 
@@ -136,7 +137,7 @@ $("#newnurse").click(function () {
     };
 
     $.ajax({
-      url: "http://localhost:8080/yokult/addOrModify",
+      url: YOKULT_URL + "/addOrModify",
       type: "POST", // GET | POST | PUT | DELETE
       data: JSON.stringify(formData),
       contentType: "application/json",
@@ -169,7 +170,7 @@ function deleteFun(staffId) {
   if (checkDelete) {
     var formdelete = { staff_id: staffId };
     $.ajax({
-      url: "http://localhost:8080/yokult/deleteStaff",
+      url: YOKULT_URL + "/deleteStaff",
       type: "POST", // GET | POST | PUT | DELETE
       data: JSON.stringify(formdelete),
       contentType: "application/json",
