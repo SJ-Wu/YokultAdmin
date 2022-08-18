@@ -384,7 +384,10 @@ $(function () {
       contentType: "application/json",
       success: function (rsp) {
         if (rsp == "success") {
-          alert("送出成功");
+          var checkDelete = confirm("送出成功!");
+          if (checkDelete) {
+            window.location = "/index_okSchedule.html";
+          }
         } else {
           alert("送出失敗");
         }
@@ -502,14 +505,6 @@ $(function () {
     myEvent = {
       id: "tga003" + "林毛毛" + "2022-09-11" + "pm" + "b",
       title: "林毛毛_" + "晚班",
-      allDay: true,
-      start: "2022-09-11",
-      color: "red",
-    };
-    calendar.addEvent(myEvent);
-    myEvent = {
-      id: "tga002" + "黃泡泡" + "2022-09-11" + "pm" + "b",
-      title: "黃泡泡_" + "晚班",
       allDay: true,
       start: "2022-09-11",
       color: "red",
