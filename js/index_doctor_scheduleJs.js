@@ -1,15 +1,6 @@
 $(function () {
   let doctorId = 1;
-  //======init 顯示id=1醫師
-  // function init() {
-  //   doctorId = 1;
-  //   $("button.D001").addClass("clicked");
-  //   let str = $("select.selectDate option:selected").text();
-  //   let date1 = str.substring(0, str.indexOf(" "));
-  //   let date2 = str.substring(str.lastIndexOf(" ") + 1);
-  //   ajaxForScheduleDrname(date1, date2);
-  // }
-  // init();
+
   //=============選擇醫師
   $("button.D001").on("click", function () {
     if ($("button.D002").hasClass("clicked")) {
@@ -244,7 +235,7 @@ $(function () {
 
   function ajaxForScheduleDrname(date1, date2) {
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/drSchedule", // 資料請求的網址
+      url: YOKULT_URL + BOOKING + "/drSchedule", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         date1: date1,
@@ -275,14 +266,9 @@ $(function () {
             if (str.length == 1) {
               str = "0" + str;
             }
-            // console.log("str=" + str);
-            // console.log(
-            //   "doctorScheduleDate substring",
-            //   listitem.doctorScheduleDate.substring(8)
-            // );
+
             if (listitem.doctorScheduleDate.substring(8) == str) {
               let ampm = listitem.doctorAmpm;
-              // console.log(ampm);
               switch (ampm) {
                 case "早":
                   $("table.weekBookingTime")
@@ -292,11 +278,6 @@ $(function () {
                     .eq(index)
                     .find("button")
                     .addClass("clicked");
-                  // $(item)
-                  //   .closest("div.week")
-                  //   .find("a")
-                  //   .eq(0)
-                  //   .addClass("clicked");
                   break;
                 case "午":
                   $("table.weekBookingTime")
@@ -306,11 +287,6 @@ $(function () {
                     .eq(index)
                     .find("button")
                     .addClass("clicked");
-                  // $(item)
-                  //   .closest("div.week")
-                  //   .find("a")
-                  //   .eq(1)
-                  //   .addClass("clicked");
                   break;
                 case "晚":
                   $("table.weekBookingTime")
@@ -320,11 +296,6 @@ $(function () {
                     .eq(index)
                     .find("button")
                     .addClass("clicked");
-                  // $(item)
-                  //   .closest("div.week")
-                  //   .find("a")
-                  //   .eq(2)
-                  //   .addClass("clicked");
                   break;
               }
             }
@@ -334,12 +305,9 @@ $(function () {
     });
   }
   //=======收集click
-  // console.log($("table.weekBookingTime").find("button"));
   $("button.saveDr").on("click", function () {
     let listOfPackage = new Array();
     $.each($("table.weekBookingTime").find("button"), function (index, item) {
-      // console.log($(item).text().trim());
-
       if ($(item).hasClass("clicked")) {
         let package = {};
         let str = $(item).text().trim();
@@ -398,7 +366,7 @@ $(function () {
     });
     console.log(listOfPackage);
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/doctor/updateDrSchedule", // 資料請求的網址
+      url: YOKULT_URL + DOCTOR + "/updateDrSchedule", // 資料請求的網址
       type: "PUT", // GET | POST | PUT | DELETE | PATCH
       contentType: "application/json",
       data: JSON.stringify({
