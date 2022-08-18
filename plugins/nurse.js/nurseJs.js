@@ -108,14 +108,13 @@ function addList(staff, staffId) {
                           </div >
                         </div > `;
   }
-
   return nurseHtml;
 }
 
 //自動填入
 $("#fastInput").click(function () {
-  $("#recipient-name").val("李四");
-  $("#recipient-mail").val("123@gmail.com");
+  $("#recipient-name").val("楊莉莉");
+  $("#recipient-mail").val("monkey@gmail.com");
   $("#recipient-id_number").val("A123456789");
   $("#recipient-birthday").val("2000-01-01");
   $("#recipient-phone").val("0912345678");
