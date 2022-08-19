@@ -169,7 +169,9 @@ $(function () {
       success: function (data) {
         // console.log(data.msg);
         if (data.msg == "nextOne success") {
-          $("span.dr1").text(`${data.bookingNumber}號 ${data.patientIdcard}`);
+          $("span.dr1").text(
+            `${data.checkinVO.bookingNumber}號 ${data.checkinVO.patientIdcard}`
+          );
         } else if (data.msg == "finish") {
           $("span.dr1").text("看診結束");
         }
