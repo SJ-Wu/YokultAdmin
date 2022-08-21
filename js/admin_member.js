@@ -30,7 +30,7 @@ window.onload = (e) => {
       removeMember["memID"] = member_id;
       console.log(removeMember);
       axios
-        .delete("http://localhost:8080/yokult/api/0.02/member/remove", {
+        .delete("http://35.236.152.197/yokult/api/0.02/member/remove", {
           data: removeMember,
         })
         .then((response) => {
