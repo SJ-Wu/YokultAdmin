@@ -52,12 +52,13 @@ window.onload = function () {
     });
     //依類別去查詢
     $("button.searchStatus").on("click", function () {
-        if ($("select#category :selected").text() == "查詢全部") {
+        if ($("select#category :selected").text().trim() == "查詢全部") {
             init();
+            return;
         }
         let statusSend = null;
-        let choice = $("select#category :selected").text();
-        console.log(choice);
+        let choice = $("select#category :selected").text().trim();
+        console.log("choice=", choice);
 
         switch (choice) {
             case "待付款":
@@ -94,7 +95,7 @@ window.onload = function () {
             creditcard: "信用卡",
             payment: "電子支付",
         };
-        console.log(statusSend);
+        console.log("statusSend=", statusSend);
         $.ajax({
             url: "http://localhost:8080/yokult/api/0.01/order/selectOrderStatus", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
